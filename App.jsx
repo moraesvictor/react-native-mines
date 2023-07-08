@@ -6,7 +6,7 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet} from 'react-native';
+import {SafeAreaView, StyleSheet, View} from 'react-native';
 import params from './src/params';
 import {createMinedBoard} from './src/useApp';
 import {MinedField} from './src/components/MinedField';
@@ -30,7 +30,9 @@ function App() {
 
   return (
     <SafeAreaView style={style.container}>
-      {!!board && board.length > 0 && <MinedField board={board} />}
+      <View>
+        <MinedField board={board} />
+      </View>
     </SafeAreaView>
   );
 }
@@ -40,6 +42,11 @@ const style = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#AAA',
+  },
+  board: {
+    alignContent: 'center',
+    backgroundColor: '#AAA',
   },
 });
 
