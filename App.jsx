@@ -6,37 +6,31 @@
  */
 
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import params from './src/params';
-import {Field} from './src/components/Field';
-import {useApp} from './src/useApp';
+import {createMinedBoard} from './src/useApp';
 import {MinedField} from './src/components/MinedField';
 
 function App() {
-  const {createMinedBoard} = useApp();
+  const [board, setBoard] = useState([]);
+
   const minesAmount = () => {
     const columns = params.getColumnsAmount();
     const rows = params.getRowsAmount();
     return Math.ceil(columns * rows * params.dificultLevel);
   };
-
-  const [board, setBoard] = useState([]);
-
   useEffect(() => {
-    setBoard(
-      createMinedBoard(
-        params.getRowsAmount(),
-        params.getColumnsAmount,
-        minesAmount(),
-      ),
+    const currentBoard = createMinedBoard(
+      params.getRowsAmount(),
+      params.getColumnsAmount(),
+      minesAmount(),
     );
-  }, [createMinedBoard]);
-
-  console.warn(board);
+    setBoard(currentBoard);
+  }, []);
 
   return (
     <SafeAreaView style={style.container}>
-      {board.length > 0 && <MinedField board={board} />}
+      {!!board && board.length > 0 && <MinedField board={board} />}
     </SafeAreaView>
   );
 }
