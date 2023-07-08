@@ -2,19 +2,22 @@ const createBoard = (rows, columns) => {
   return Array(rows)
     .fill(0)
     .map((_, row) => {
-      return Array(columns)
-        .fill(0)
-        .map((_, column) => {
-          return {
-            row,
-            column,
-            flag: false,
-            mined: false,
-            opened: false,
-            exploded: false,
-            nearMines: 0,
-          };
-        });
+      return (
+        Array(columns)
+          .fill(0)
+          // eslint-disable-next-line no-shadow
+          .map((_, column) => {
+            return {
+              row,
+              column,
+              flag: false,
+              mined: false,
+              opened: false,
+              exploded: false,
+              nearMines: 0,
+            };
+          })
+      );
     });
 };
 
@@ -37,6 +40,5 @@ const spreadMine = (board, mines) => {
 export const createMinedBoard = (rows, columns, minesAmount) => {
   const board = createBoard(rows, columns);
   spreadMine(board, minesAmount);
-  console.warn(board);
   return board;
 };
