@@ -25,7 +25,7 @@ To run the project locally, follow these steps:
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your-username/minefield-game.git
+git clone https://github.com/moraesvictor/react-native-mines.git
 ```
 
 
@@ -38,4 +38,13 @@ npm install
 ## Technologies Used
 - React Native
 - JavaScript
+
+## Contributing
+Contributions are welcome! If you want to contribute to this project, follow these steps:
+
+- Fork the repository.
+- Create a new branch.
+- Make your changes and commit them.
+- Push your changes to your forked repository.
+- Submit a pull request.
 
