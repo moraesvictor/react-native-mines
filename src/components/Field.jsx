@@ -1,6 +1,12 @@
 import React from 'react';
 
-import {StyleSheet, View, Text} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Alert,
+} from 'react-native';
 import params from '../params';
 import {Mine} from './Mine';
 import {Flag} from './Flag';
@@ -34,7 +40,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const Field = ({mined, opened, nearMines, exploded, flag}) => {
+export const Field = ({mined, opened, nearMines, exploded, flag, onOpen}) => {
   const styledField = [styles.field];
 
   let color = null;
@@ -70,13 +76,20 @@ export const Field = ({mined, opened, nearMines, exploded, flag}) => {
     }
   }
 
+  const handleOpen = () => {
+    onOpen();
+    Alert.alert('pressionou');
+  };
+
   return (
-    <View style={styledField}>
-      {!mined && opened && nearMines > 0 && (
-        <Text style={[styles.label, {color}]}>{nearMines}</Text>
-      )}
-      {mined && opened && <Mine />}
-      {flag && !opened && <Flag />}
-    </View>
+    <TouchableWithoutFeedback onPress={handleOpen}>
+      <View pointerEvents="none" style={styledField}>
+        {!mined && opened && nearMines > 0 && (
+          <Text style={[styles.label, {color}]}>{nearMines}</Text>
+        )}
+        {mined && opened && <Mine />}
+        {flag && !opened && <Flag />}
+      </View>
+    </TouchableWithoutFeedback>
   );
 };

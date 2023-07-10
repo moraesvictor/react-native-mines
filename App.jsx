@@ -1,14 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {Alert, SafeAreaView, StyleSheet} from 'react-native';
 import params from './src/params';
-import {createMinedBoard} from './src/useApp';
+import {
+  cloneBoard,
+  createMinedBoard,
+  hadExplosion,
+  openField,
+  showMines,
+  wonGame,
+} from './src/useApp';
 import {MinedField} from './src/components/MinedField';
 
 function App() {
@@ -28,11 +28,26 @@ function App() {
     setBoard(currentBoard);
   }, []);
 
+  const handleOpenField = (row, column) => {
+    const clonedBoard = cloneBoard(board);
+    openField(clonedBoard, row, column);
+    const lost = hadExplosion(clonedBoard);
+    const win = wonGame(clonedBoard);
+
+    if (lost) {
+      showMines(clonedBoard);
+      Alert.alert('You lose!');
+    }
+    if (win) {
+      Alert.alert('You win!');
+    }
+
+    setBoard(clonedBoard);
+  };
+
   return (
     <SafeAreaView style={style.container}>
-      <View>
-        <MinedField board={board} />
-      </View>
+      <MinedField onOpenField={handleOpenField} board={board} />
     </SafeAreaView>
   );
 }

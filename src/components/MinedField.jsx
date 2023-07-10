@@ -5,7 +5,9 @@ import {StyleSheet, View} from 'react-native';
 export const MinedField = props => {
   const rows = props.board.map((row, r) => {
     const columns = row.map((field, c) => {
-      return <Field {...field} key={c} />;
+      return (
+        <Field {...field} key={c} onOpen={() => props.onOpenField(r, c)} />
+      );
     });
     return (
       // eslint-disable-next-line react-native/no-inline-styles
