@@ -17,7 +17,8 @@ This project implements the minefield game using React Native, providing an inte
 - Win and lose conditions.
 - User-friendly interface.
 
-
+## screenshot
+![Screenshot](mines.PNG)
 ## Installation
 
 To run the project locally, follow these steps:
